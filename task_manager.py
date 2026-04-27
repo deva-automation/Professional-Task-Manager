@@ -1,33 +1,31 @@
 import json
 import os
 
-# ডাটাবেস ফাইলের নাম
+# Database file name
 FILE_NAME = "tasks.json"
 
 def load_tasks():
-    """JSON ফাইল থেকে ডাটা লোড করার ফাংশন"""
-    # যদি ফাইল না থাকে, তবে একটি ফাঁকা লিস্ট রিটার্ন করবে
+    """Function to load data from JSON file"""
     if not os.path.exists(FILE_NAME):
         return []
     
-    # ফাইল থাকলে ডাটা রিড করবে
     with open(FILE_NAME, "r") as file:
         return json.load(file)
 
 def save_tasks(tasks):
-    """নতুন ডাটা JSON ফাইলে সেভ করার ফাংশন"""
+    """Function to save data to JSON file"""
     with open(FILE_NAME, "w") as file:
         json.dump(tasks, file, indent=4)
 
 def add_task(tasks):
-    """নতুন কাজ যুক্ত করার ফাংশন"""
+    """Function to add a new task"""
     task_name = input("📝 Enter the new task: ")
     tasks.append({"task": task_name, "status": "Pending"})
     save_tasks(tasks)
     print(f"✅ Task '{task_name}' added successfully!")
 
 def view_tasks(tasks):
-    """সব কাজ দেখার ফাংশন"""
+    """Function to display all tasks"""
     if not tasks:
         print("📭 No tasks found! Your list is empty.")
         return
@@ -38,7 +36,7 @@ def view_tasks(tasks):
     print("------------------------\n")
 
 def delete_task(tasks):
-    """কাজ ডিলিট করার ফাংশন"""
+    """Function to delete a task by index"""
     view_tasks(tasks)
     if not tasks:
         return
@@ -55,7 +53,7 @@ def delete_task(tasks):
         print("❌ Please enter a valid number.")
 
 def main():
-    """মেইন মেনু লুপ (প্রোগ্রাম এখান থেকে শুরু হবে)"""
+    """Main menu loop"""
     tasks = load_tasks()
     
     while True:
